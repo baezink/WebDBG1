@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebDbG1.Data;
 
@@ -11,9 +12,10 @@ using WebDbG1.Data;
 namespace WebDbG1.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220803072837_Uno")]
+    partial class Uno
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,28 +226,6 @@ namespace WebDbG1.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WebDbG1.Areas.Identity.Ciudad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("DptoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DptoId");
-
-                    b.ToTable("Ciudades");
-                });
-
             modelBuilder.Entity("WebDbG1.Areas.Identity.Dpto", b =>
                 {
                     b.Property<int>("Id")
@@ -261,43 +241,6 @@ namespace WebDbG1.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Dptos");
-                });
-
-            modelBuilder.Entity("WebDbG1.Areas.Identity.Persona", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CiudadId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Direccion")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<DateTime>("Fechanac")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nombre")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("Telefono")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CiudadId");
-
-                    b.ToTable("Personas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -349,38 +292,6 @@ namespace WebDbG1.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("WebDbG1.Areas.Identity.Ciudad", b =>
-                {
-                    b.HasOne("WebDbG1.Areas.Identity.Dpto", "Dpto")
-                        .WithMany("Ciudades")
-                        .HasForeignKey("DptoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dpto");
-                });
-
-            modelBuilder.Entity("WebDbG1.Areas.Identity.Persona", b =>
-                {
-                    b.HasOne("WebDbG1.Areas.Identity.Ciudad", "Ciudad")
-                        .WithMany("Personas")
-                        .HasForeignKey("CiudadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ciudad");
-                });
-
-            modelBuilder.Entity("WebDbG1.Areas.Identity.Ciudad", b =>
-                {
-                    b.Navigation("Personas");
-                });
-
-            modelBuilder.Entity("WebDbG1.Areas.Identity.Dpto", b =>
-                {
-                    b.Navigation("Ciudades");
                 });
 #pragma warning restore 612, 618
         }

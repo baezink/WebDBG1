@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebDbG1.Areas.Identity;
 
 namespace WebDbG1.Data
 {
@@ -9,5 +10,15 @@ namespace WebDbG1.Data
             : base(options)
         {
         }
+
+        public DbSet<Dpto>? Dptos { get; set; }
+
+        public DbSet<Ciudad>? Ciudades { get; set; }
+
+        public DbSet<Persona>? Personas { get; set; }
+
+
+
+
     }
 }
